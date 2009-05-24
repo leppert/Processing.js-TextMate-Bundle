@@ -16,9 +16,9 @@
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>(?&lt;!&lt;/(?:script|SCRIPT))(&gt;)</string>
+			<string>(?i)(application/processing)\b(.*?)(&gt;)</string>
 			<key>end</key>
-			<string>(&lt;/)((?i:script))</string>
+			<string>(&lt;/(script|SCRIPT))(&gt;)</string>
 			<key>patterns</key>
 			<array>
 				<dict>

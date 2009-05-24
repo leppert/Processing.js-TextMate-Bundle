@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array/>
+	<key>foldingStartMarker</key>
+	<string>/\*\*|\{\s*$</string>
+	<key>foldingStopMarker</key>
+	<string>\*\*/|^\s*\}</string>
+	<key>keyEquivalent</key>
+	<string>^~P</string>
+	<key>name</key>
+	<string>Processing.js</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>(?&lt;!&lt;/(?:script|SCRIPT))(&gt;)</string>
+			<key>end</key>
+			<string>(&lt;/)((?i:script))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.js</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.processing</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.processing.js</string>
+	<key>uuid</key>
+	<string>254BBEC9-8107-421D-9848-F14F74E1B9C0</string>
+</dict>
+</plist>

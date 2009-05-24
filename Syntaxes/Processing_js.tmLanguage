@@ -15,59 +15,40 @@
 	<key>patterns</key>
 	<array>
 		<dict>
-			<key>begin</key>
-			<string>(?i:application/processing)\b(.*?)(&gt;)</string>
-			<key>end</key>
-			<string>(&lt;/(script|SCRIPT))(&gt;)</string>
-			<key>name</key>
-			<string>meta.processing.js</string>
-			<key>patterns</key>
-			<array>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
 				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>storage.type.function.js</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.js</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.begin.js</string>
-						</dict>
-						<key>4</key>
-						<dict>
-							<key>name</key>
-							<string>variable.parameter.function.js</string>
-						</dict>
-						<key>5</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.end.js</string>
-						</dict>
-					</dict>
-					<key>comment</key>
-					<string>match void function like: void myFunc(arg) { … }</string>
-					<key>match</key>
-					<string>\b(void)\s+([a-zA-Z_$]\w*)?\s*(\()(.*?)(\))</string>
 					<key>name</key>
-					<string>meta.function.processing.js</string>
+					<string>storage.type.function.js</string>
 				</dict>
+				<key>2</key>
 				<dict>
-					<key>include</key>
-					<string>source.js</string>
+					<key>name</key>
+					<string>entity.name.function.js</string>
 				</dict>
+				<key>3</key>
 				<dict>
-					<key>include</key>
-					<string>source.processing</string>
+					<key>name</key>
+					<string>punctuation.definition.parameters.begin.js</string>
 				</dict>
-			</array>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.function.js</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.parameters.end.js</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>match void function like: void myFunc(arg) { … }</string>
+			<key>match</key>
+			<string>\b(void)\s+([a-zA-Z_$]\w*)?\s*(\()(.*?)(\))</string>
+			<key>name</key>
+			<string>meta.function.processing.js</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -133,7 +114,28 @@
 			<key>name</key>
 			<string>meta.tag.any.html</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#embedded-code</string>
+		</dict>
 	</array>
+	<key>repository</key>
+	<dict>
+		<key>embedded-code</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.js</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.processing</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>scopeName</key>
 	<string>source.processing.js</string>
 	<key>uuid</key>

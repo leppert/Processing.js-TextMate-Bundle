@@ -71,7 +71,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?i)(&lt;)(canvas).*?\s(width|height)="([\d]+(px)?)".*?\s(width|height)="([\d]+(px)?)"(?=[^&gt;]*&gt;&lt;/\2&gt;)</string>
+			<string>(?i)(&lt;)(canvas).*?\s(width|height)="([\d]+(?:px)?)".*?\s(width|height)="([\d]+(?:px)?)"(?=[^&gt;]*&gt;&lt;/\2&gt;)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -94,12 +94,12 @@
 					<key>name</key>
 					<string>constant.numeric</string>
 				</dict>
-				<key>6</key>
+				<key>5</key>
 				<dict>
 					<key>name</key>
 					<string>support.function.processing</string>
 				</dict>
-				<key>7</key>
+				<key>6</key>
 				<dict>
 					<key>name</key>
 					<string>constant.numeric</string>

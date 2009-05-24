@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>. "$TM_SUPPORT_PATH/lib/webpreview.sh"
 html_header "Processing.js Help" "Processing.js"
-"$TM_SUPPORT_PATH/lib/markdown_to_help.rb" "$TM_BUNDLE_SUPPORT/help.markdown"
+Markdown.pl "$TM_BUNDLE_SUPPORT/help.markdown"
 html_footer</string>
 	<key>input</key>
 	<string>selection</string>

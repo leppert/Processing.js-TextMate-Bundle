@@ -51,6 +51,14 @@
 			<string>meta.function.processing.js</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>To help visually suppress lines with only HTML tags in embedded instances</string>
+			<key>match</key>
+			<string>(^(\s*&lt;).+(&gt;\s*)$)|(\s*&lt;!DOCTYPE.*)|(.+dtd"&gt;\s*)</string>
+			<key>name</key>
+			<string>meta.tag.any.html</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>(?i)(&lt;)(canvas).*?\s(width|height)="([\d]+(?:px)?)".*?\s(width|height)="([\d]+(?:px)?)"(?=[^&gt;]*&gt;&lt;/\2&gt;)</string>
 			<key>beginCaptures</key>

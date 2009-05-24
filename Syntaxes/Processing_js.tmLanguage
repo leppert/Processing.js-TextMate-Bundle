@@ -16,7 +16,7 @@
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>(?i)(application/processing)\b(.*?)(&gt;)</string>
+			<string>(?i:application/processing)\b(.*?)(&gt;)</string>
 			<key>end</key>
 			<string>(&lt;/(script|SCRIPT))(&gt;)</string>
 			<key>name</key>

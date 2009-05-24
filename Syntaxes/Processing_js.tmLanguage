@@ -22,6 +22,42 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.function.js</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.js</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.parameters.begin.js</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.function.js</string>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.parameters.end.js</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>match regular function like: void myFunc(arg) { … }</string>
+					<key>match</key>
+					<string>\b(void)\s+([a-zA-Z_$]\w*)?\s*(\()(.*?)(\))</string>
+					<key>name</key>
+					<string>meta.function.processing.js</string>
+				</dict>
+				<dict>
 					<key>include</key>
 					<string>source.js</string>
 				</dict>

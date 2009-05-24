@@ -19,6 +19,8 @@
 			<string>(?i)(application/processing)\b(.*?)(&gt;)</string>
 			<key>end</key>
 			<string>(&lt;/(script|SCRIPT))(&gt;)</string>
+			<key>name</key>
+			<string>meta.processing.js</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -66,6 +68,60 @@
 					<string>source.processing</string>
 				</dict>
 			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>(?i)(&lt;)(canvas)(\s+[\w]+?="([\d]+(px)?)")(\s+[\w]+?="([\d]+(px)?)")(?=[^&gt;]*&gt;&lt;/\2&gt;)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.html</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.html</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric</string>
+				</dict>
+				<key>7</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(&gt;(&lt;)/)(\2)(&gt;)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.html</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.scope.between-tag-pair.html</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.html</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.html</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.tag.any.html</string>
 		</dict>
 	</array>
 	<key>scopeName</key>

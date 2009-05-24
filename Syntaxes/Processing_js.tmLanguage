@@ -51,7 +51,7 @@
 						</dict>
 					</dict>
 					<key>comment</key>
-					<string>match regular function like: void myFunc(arg) { … }</string>
+					<string>match void function like: void myFunc(arg) { … }</string>
 					<key>match</key>
 					<string>\b(void)\s+([a-zA-Z_$]\w*)?\s*(\()(.*?)(\))</string>
 					<key>name</key>

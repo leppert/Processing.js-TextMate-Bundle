@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>contactEmailRot13</key>
-	<string>tert@sbeznfshapgvba.pbz</string>
-	<key>contactName</key>
-	<string>Greg Leppert</string>
-	<key>description</key>
-	<string><a href="http://processingjs.org">Processing.js</a> is a Javascript implementation of the <a href="http://processing.org">Processing language</a>. This bundle primarily functions in tying together the Javascript and Processing bundles.</string>
 	<key>name</key>
 	<string>Processing.js</string>
 	<key>ordering</key>

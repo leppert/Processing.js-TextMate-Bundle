@@ -54,7 +54,7 @@
 			<key>comment</key>
 			<string>To help visually suppress lines with only HTML tags in embedded instances</string>
 			<key>match</key>
-			<string>(^(\s*&lt;).+(&gt;\s*)$)|(\s*&lt;!DOCTYPE.*)|(.+dtd"&gt;\s*)</string>
+			<string>(?i)(^(\s*&lt;(?!canvas)).+(&gt;\s*)$)|(\s*&lt;!DOCTYPE.*)|(.+dtd"&gt;\s*)</string>
 			<key>name</key>
 			<string>meta.tag.any.html</string>
 		</dict>

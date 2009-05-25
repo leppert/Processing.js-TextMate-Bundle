@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
-	<string>saveActiveFile</string>
+	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby -wKU
 # 
@@ -17,11 +17,27 @@
 
 require "#{ENV['TM_SUPPORT_PATH']}/lib/escape.rb"
 
-if ENV['TM_PROJECT_SITEURL']
+url = "/tmp/processing_js_preview.html"
+header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;Temp&lt;/title&gt;&lt;script language="javascript" src="http://github.com/jeresig/processing-js/raw/master/examples/init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="http://github.com/jeresig/processing-js/raw/master/processing.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
+footer = '&lt;/script&gt;&lt;canvas width="200px" height="200px"&gt;&lt;/canvas&gt;&lt;/body&gt;&lt;/html&gt;'
+
+my_file = File.new(url, "w")
+my_file.puts header + STDIN.read + footer
+
+=begin
+if ENV['TM_FILEPATH'] &amp;&amp; ENV['TM_FILEPATH'][-2,2] == "js"
+	url = "/tmp/processing_js_preview.html"
+	header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;Temp&lt;/title&gt;&lt;script language="javascript" src="http://github.com/jeresig/processing-js/raw/master/examples/init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="http://github.com/jeresig/processing-js/raw/master/processing.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
+	footer = '&lt;/script&gt;&lt;canvas width="200px" height="200px"&gt;&lt;/canvas&gt;&lt;/body&gt;&lt;/html&gt;'
+
+	my_file = File.new(url, "w")
+	my_file.puts header + STDIN.read + footer
+elseif ENV['TM_PROJECT_SITEURL']
   url = "#{ENV['TM_PROJECT_SITEURL']}" + ENV['TM_FILEPATH'].sub(/^#{Regexp.escape(ENV['TM_PROJECT_DIRECTORY'])}\//, '') 
 else
   url = "file://#{ENV['TM_FILEPATH']}"
 end
+=end
 
 proclist = `ps -x -o command`
 active = []
@@ -51,7 +67,7 @@ else
   active.each {|p| `open -a #{e_sh(p)} #{e_sh(url)}` }
 end</string>
 	<key>input</key>
-	<string>none</string>
+	<string>document</string>
 	<key>keyEquivalent</key>
 	<string>@r</string>
 	<key>name</key>

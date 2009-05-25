@@ -17,13 +17,15 @@
 
 require "#{ENV['TM_SUPPORT_PATH']}/lib/escape.rb"
 
-if ENV['TM_FILEPATH'][-2,2] == "js"
+contents = STDIN.read
+
+if !contents.index("application/processing")
 	url = "/tmp/processing_js_preview.html"
 	header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;Temp&lt;/title&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
 	footer = '&lt;/script&gt;&lt;canvas width="200px" height="200px"&gt;&lt;/canvas&gt;&lt;/body&gt;&lt;/html&gt;'
 
 	my_file = File.new(url, "w")
-	my_file.puts header + STDIN.read + footer
+	my_file.puts header + contents + footer
 elsif ENV['TM_PROJECT_SITEURL']
   url = "#{ENV['TM_PROJECT_SITEURL']}" + ENV['TM_FILEPATH'].sub(/^#{Regexp.escape(ENV['TM_PROJECT_DIRECTORY'])}\//, '') 
 else

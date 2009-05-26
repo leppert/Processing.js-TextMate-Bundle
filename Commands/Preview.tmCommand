@@ -15,7 +15,7 @@ if !ENV['TM_FILEPATH'] || ENV['TM_FILEPATH'][-2,2] == "js"  #if the file hasn't 
 	my_file = File.new(url, "w")                              #create the temp file
 	if !contents.index("application/processing")              #do a quick check to see if processing code is embedded since the file might not have an extension yet
 		dimensions = contents.scan(/size\(\s*(\d*).*?(\d*)/)    #find the dimensions in the processing code
-		header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;TextMate Processing.js Quick Preview&lt;/title&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
+		header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;TextMate Processing.js Quick Preview&lt;/title&gt;&lt;script language="javascript" src="http://github.com/jeresig/processing-js/raw/master/examples/init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="http://github.com/jeresig/processing-js/raw/master/processing.min.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
 		footer = '&lt;/script&gt;&lt;canvas width="'+dimensions[0][0]+'px" height="'+dimensions[0][1]+'px"&gt;&lt;/canvas&gt;&lt;/body&gt;&lt;/html&gt;'
 		my_file.puts header + contents + footer                 #add the small html header and the footer with a canvas
 	else

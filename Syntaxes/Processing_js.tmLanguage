@@ -94,6 +94,8 @@
 					<string>constant.numeric</string>
 				</dict>
 			</dict>
+			<key>comment</key>
+			<string>Highlight the html canvas tag since its central to development</string>
 			<key>end</key>
 			<string>(&gt;(&lt;)/)(\2)(&gt;)</string>
 			<key>endCaptures</key>

@@ -16,21 +16,27 @@
 # in the following form: "http://example.com/"
 
 require "#{ENV['TM_SUPPORT_PATH']}/lib/escape.rb"
+require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
 
-contents = STDIN.read
-
-if !contents.index("application/processing")
-	dimensions = contents.scan(/size\(\s*(\d*).*?(\d*)/)
+if !ENV['TM_FILEPATH'] || ENV['TM_FILEPATH'][-2,2] == "js" #if the file hasn't been saved or it's a javascript file
+	contents = STDIN.read
 	url = "/tmp/processing_js_preview.html"
-	header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;TextMate Processing.js Quick Preview&lt;/title&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
-	footer = '&lt;/script&gt;&lt;canvas width="'+dimensions[0][0]+'px" height="'+dimensions[0][1]+'px"&gt;&lt;/canvas&gt;&lt;/body&gt;&lt;/html&gt;'
-
 	my_file = File.new(url, "w")
-	my_file.puts header + contents + footer
-elsif ENV['TM_PROJECT_SITEURL']
-  url = "#{ENV['TM_PROJECT_SITEURL']}" + ENV['TM_FILEPATH'].sub(/^#{Regexp.escape(ENV['TM_PROJECT_DIRECTORY'])}\//, '') 
+	if !contents.index("application/processing") #do a quick check to see if processing code is embedded since the file might not have an extension yet
+		dimensions = contents.scan(/size\(\s*(\d*).*?(\d*)/)
+		header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;TextMate Processing.js Quick Preview&lt;/title&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
+		footer = '&lt;/script&gt;&lt;canvas width="'+dimensions[0][0]+'px" height="'+dimensions[0][1]+'px"&gt;&lt;/canvas&gt;&lt;/body&gt;&lt;/html&gt;'
+		my_file.puts header + contents + footer
+	else
+		my_file.puts contents
+	end
 else
-  url = "file://#{ENV['TM_FILEPATH']}"
+	TextMate.save_current_document
+	if ENV['TM_PROJECT_SITEURL']
+  		url = "#{ENV['TM_PROJECT_SITEURL']}" + ENV['TM_FILEPATH'].sub(/^#{Regexp.escape(ENV['TM_PROJECT_DIRECTORY'])}\//, '') 
+	else
+  		url = "file://#{ENV['TM_FILEPATH']}"
+	end
 end
 
 proclist = `ps -x -o command`

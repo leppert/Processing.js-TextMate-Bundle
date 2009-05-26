@@ -6,32 +6,24 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby -wKU
-# 
-# Open Document in Running Browser(s)
-# 
-# Now supports multiple running versions of a single browser along
-# with a range of new/old browsers. Bring back support for Firefox.
-# 
-# Options: Set TM_PROJECT_SITEURL in your TM Project Window Info Button
-# in the following form: "http://example.com/"
-
 require "#{ENV['TM_SUPPORT_PATH']}/lib/escape.rb"
 require ENV["TM_SUPPORT_PATH"] + "/lib/tm/save_current_document"
 
-if !ENV['TM_FILEPATH'] || ENV['TM_FILEPATH'][-2,2] == "js" #if the file hasn't been saved or it's a javascript file
-	contents = STDIN.read
-	url = "/tmp/processing_js_preview.html"
-	my_file = File.new(url, "w")
-	if !contents.index("application/processing") #do a quick check to see if processing code is embedded since the file might not have an extension yet
-		dimensions = contents.scan(/size\(\s*(\d*).*?(\d*)/)
+if !ENV['TM_FILEPATH'] || ENV['TM_FILEPATH'][-2,2] == "js"  #if the file hasn't been saved or it's a javascript file
+	contents = STDIN.read                                     #grab the stream of the window contents
+	url = "/tmp/processing_js_preview.html"                   #create the temp url
+	my_file = File.new(url, "w")                              #create the temp file
+	if !contents.index("application/processing")              #do a quick check to see if processing code is embedded since the file might not have an extension yet
+		dimensions = contents.scan(/size\(\s*(\d*).*?(\d*)/)    #find the dimensions in the processing code
 		header = '&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;&lt;title&gt;TextMate Processing.js Quick Preview&lt;/title&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.init.js"&gt;&lt;/script&gt;&lt;script language="javascript" src="/Users/letsbequiet/Sites/drawing_tests/2/js/processing.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;script type="application/processing"&gt;'
 		footer = '&lt;/script&gt;&lt;canvas width="'+dimensions[0][0]+'px" height="'+dimensions[0][1]+'px"&gt;&lt;/canvas&gt;&lt;/body&gt;&lt;/html&gt;'
-		my_file.puts header + contents + footer
+		my_file.puts header + contents + footer                 #add the small html header and the footer with a canvas
 	else
-		my_file.puts contents
+		my_file.puts contents                                   #if it was embedded code, just echo the page as is
 	end
-else
-	TextMate.save_current_document
+else                                                        #if the file is HTML, save it and preview the actual file intead of a temp file.
+	TextMate.save_current_document                            #save_current_document uses STDIN.read which can only be read once so it's important not to try to read it earlier on
+### ALL OF THE FOLLOWING CODE WAS TAKEN FROM THE "Open Document in Running Browser(s)" COMMAND IN THE HTML BUNDLE ###
 	if ENV['TM_PROJECT_SITEURL']
   		url = "#{ENV['TM_PROJECT_SITEURL']}" + ENV['TM_FILEPATH'].sub(/^#{Regexp.escape(ENV['TM_PROJECT_DIRECTORY'])}\//, '') 
 	else
